@@ -3,6 +3,31 @@
     import { Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Checkbox, TableSearch } from 'flowbite-svelte';
     import { onMount } from 'svelte';
 
+    //return a readable date
+    function getFormattedDate() {
+  const now = new Date();
+
+  // Array of weekday names
+  const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  // Array of month names
+  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+  // Get the weekday, month, day, hour, and minute
+  const weekday = weekdays[now.getDay()];
+  const month = months[now.getMonth()];
+  const day = now.getDate();
+  const hour = now.getHours();
+  const minute = now.getMinutes();
+
+  // Format time in 12-hour format with AM/PM
+  const period = hour >= 12 ? "pm" : "am";
+  const formattedHour = hour % 12 || 12; // Converts 24-hour time to 12-hour time (e.g., 0 -> 12, 13 -> 1)
+  const formattedMinute = minute < 10 ? `0${minute}` : minute; // Add leading zero for single digits
+
+  // Return the final formatted string
+  return `${weekday}, ${month} ${day} at ${formattedHour}:${formattedMinute}${period}`;
+}
+
     // variables to indicate whether or not flights are allowed: false = no go, true = go
     let dualTrafficPattern = true;
     let dualPracticeArea = true;
@@ -258,10 +283,9 @@
 
 
 </script>
-
-<Heading tag="h1" class="mb-4" customSize="text-4xl font-extrabold  md:text-5xl lg:text-6xl">FLIGHT LINE STATUS</Heading>
-<P>DATE / TIME LAST UPDATED</P>
-<P>NUMBERS BASED ON RUNWAY {bestRunway}</P>
+<div class="container">
+<h1>FLIGHT LINE STATUS</h1>
+<P>{getFormattedDate()} - Based on usage of runway {bestRunway}</P>
 
 <div class="tableContainer">
 <Table class="statusTable">
@@ -339,18 +363,38 @@
     
   </Table>
 </div>
+</div>
 
 <style>
+    :global(html) {
+        background-color: white;
+    }
     :global(.statusTable) {
         width: 100%;
         border: 1px solid #ccc;
     }
 
+    
+
     :global(.tableContainer) {
-        padding: 25px;
+        padding-top: 20px;
+    }
+    :global(P) {
+        color: #39488e;
+    }
+
+    :global(h1) {
+        color: #39488e;
+        font-weight: bold;
+        font-size: 4rem;
     }
 
     :global(TableBodyCell) {
+        width: 100%;
         text-align: center;
+    }
+    :global(.container) {
+        padding-left: 30px;
+        padding-right: 30px;
     }
 </style>
