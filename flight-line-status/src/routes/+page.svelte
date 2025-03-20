@@ -23,9 +23,36 @@
     let timeBuildCrossCountry = false;
     let timeBuildIFR = false;
 
-async function getCurrentMetarValues() {
+    let metarReports = [];
 
-}
+  // Define an async function to fetch data from the API
+  async function fetchMetarData() {
+    const url = 'https://aviationweather.gov/api/data/metar?ids=KORL&format=json&taf=false&hours=3';
+
+    try {
+      // Fetch the data from the API
+      const response = await fetch(url);
+
+      // Check if the response is successful
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      // Parse the JSON data
+      const data = await response.json();
+      metarReports = data; // Store the fetched data in metarReports array
+      console.log(metarReports)
+    } catch (error) {
+      console.error('Error fetching METAR data:', error);
+    }
+  }
+
+    // Fetch the data when the component is mounted
+    import { onMount } from 'svelte';
+
+    onMount(() => {
+    fetchMetarData();
+    });
 
 </script>
 
