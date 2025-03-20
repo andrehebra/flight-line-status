@@ -279,6 +279,13 @@
         } else {
             console.log('Data is not available');
         }
+
+        const interval = setInterval(() => {
+            location.reload();
+        }, 300000);
+
+        // Cleanup the interval when the component is destroyed
+        return () => clearInterval(interval);
     });
 
 
@@ -289,7 +296,7 @@
 
 <div class="tableContainer">
 <Table class="statusTable">
-    <TableHead>
+    <TableHead theadClass='text-xl uppercase'>
       <TableHeadCell>Flight Profile</TableHeadCell>
       <TableHeadCell>Conditions</TableHeadCell>
       <TableHeadCell>Status</TableHeadCell>
@@ -371,16 +378,15 @@
     }
     :global(.statusTable) {
         width: 100%;
-        border: 1px solid #ccc;
     }
 
-    
-
     :global(.tableContainer) {
-        padding-top: 20px;
+        padding-top: 10px;
+        width: 98vw;
     }
     :global(P) {
         color: #39488e;
+        font-size: 2rem;
     }
 
     :global(h1) {
@@ -389,12 +395,7 @@
         font-size: 4rem;
     }
 
-    :global(TableBodyCell) {
-        width: 100%;
-        text-align: center;
-    }
     :global(.container) {
-        padding-left: 30px;
-        padding-right: 30px;
+        padding-left: 2vw;
     }
 </style>
