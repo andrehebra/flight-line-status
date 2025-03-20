@@ -147,19 +147,103 @@
         console.log("crosswind component: " + crossWindComponent);
         console.log("headwind component: " + headWindComponent);
 
+        //remove flights if crosswind greater than 15 knots
+        if (crossWindComponent > 15) {
+            dualTrafficPattern = false;
+            dualPracticeArea = false;
+            dualCrossCountry = false;
+            dualIFR = false;
+            renterTrafficPattern = false;
+            renterPracticeArea = false;
+            renterCrossCountry = false;
+            renterIFR = false;
+            timeBuildTrafficPattern = false;
+            timeBuildPracticeArea = false;
+            timeBuildCrossCountry = false;
+            timeBuildIFR = false; 
+        }
 
+        //remove solo flights if crosswind greater than 10 knots
+        if (crossWindComponent > 10) {
+            soloTrafficPattern = false;
+            soloPracticeArea = false;
+            soloCrossCountry = false;
+        }
 
+        //get the visibility
+        let visibility = parseFloat(metar.visib);
+        console.log(visibility);
 
+        //check if vis is less than 1sm to remove traffic pattern flights
+        if (visibility < 1) {
+            dualIFR = false;
+        }
 
+        //check if vis is less than 3sm to remove traffic pattern flights
+        if (visibility < 3) {
+            dualTrafficPattern = false;
+            soloTrafficPattern = false;
+            renterTrafficPattern = false;
+            timeBuildTrafficPattern = false;
+        }
+
+        //check if vis is less than 5sm for the practice area
+        if (visibility < 5) {
+            dualPracticeArea = false;
+            soloPracticeArea = false;
+            renterPracticeArea = false;
+            timeBuildPracticeArea = false;
+        }
+
+        // check if vis is less than 6sm for cross country
+        if (visibility < 6) {
+            dualCrossCountry = false;
+            soloCrossCountry = false;
+            renterCrossCountry = false;
+            timeBuildCrossCountry = false;
+        }
 
         //get the ceiling
         let lowestCeiling = 100000;
         for (let i = 0; i < metar.clouds.length; i++) {
             if (metar.clouds[i].cover == "BKN" || metar.clouds[i].cover == "OVC") {
                 if (metar.clouds[i].base <= lowestCeiling) {
-                    lowestCeling = metar.clouds[i].base;
+                    lowestCeiling = metar.clouds[i].base;
                 }
             }
+        }
+
+        // check if ceiling below 1600
+        if (lowestCeiling < 1600) {
+            dualTrafficPattern = false;
+            soloTrafficPattern = false;
+            renterTrafficPattern = false;
+            timeBuildTrafficPattern = false;
+        }
+
+        // check if ceiling below 2000
+        if (lowestCeiling < 2000) {
+            dualPracticeArea = false;
+            soloPracticeArea = false;
+            renterPracticeArea = false;
+            timeBuildPracticeArea = false;
+            dualCrossCountry = false;
+            timeBuildCrossCountry = false;
+        }
+
+        // check if ceiling below 4000
+        if (lowestCeiling < 4000) {
+            soloCrossCountry = false;
+        }
+
+        // check if ceiling below 3000
+        if (lowestCeiling < 3000) {
+            renterCrossCountry = false;
+        }
+
+        //check if ceiling below 740
+        if (lowestCeiling < 740) {
+            dualIFR = false;
         }
         
     }
@@ -234,10 +318,7 @@
             <TableBodyCell>Cross Country</TableBodyCell>
             <TableBodyCell>{renterCrossCountry ? "GO" : "NO-GO"}</TableBodyCell>
         </TableBodyRow>
-        <TableBodyRow>
-            <TableBodyCell>IFR</TableBodyCell>
-            <TableBodyCell>{renterIFR ? "GO" : "NO-GO"}</TableBodyCell>
-        </TableBodyRow>
+        
     </TableBody>
     <TableBody tableBodyClass="divide-y">
         <TableBodyRow>
@@ -253,10 +334,7 @@
             <TableBodyCell>Cross Country</TableBodyCell>
             <TableBodyCell>{timeBuildCrossCountry ? "GO" : "NO-GO"}</TableBodyCell>
         </TableBodyRow>
-        <TableBodyRow>
-            <TableBodyCell>IFR</TableBodyCell>
-            <TableBodyCell>{timeBuildIFR ? "GO" : "NO-GO"}</TableBodyCell>
-        </TableBodyRow>
+        
     </TableBody>
     
   </Table>
