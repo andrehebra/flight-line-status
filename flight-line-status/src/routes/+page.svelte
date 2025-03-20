@@ -2,6 +2,7 @@
     import { Heading, P } from 'flowbite-svelte';
     import { Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Checkbox, TableSearch } from 'flowbite-svelte';
     import { onMount } from 'svelte';
+    import { Hr } from 'flowbite-svelte'
 
     //return a readable date
     function getFormattedDate() {
@@ -320,6 +321,7 @@
             <TableBodyCell tdClass={dualIFR ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{dualIFR ? "GO" : "NO-GO"}</TableBodyCell>
         </TableBodyRow>
     </TableBody>
+    <Hr classHr='my-0'></Hr>
     <TableBody tableBodyClass="divide-y">
         <TableBodyRow>
             <TableBodyCell rowspan="4">SOLO</TableBodyCell>
@@ -335,6 +337,7 @@
             <TableBodyCell tdClass={soloCrossCountry ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{soloCrossCountry ? "GO" : "NO-GO"}</TableBodyCell>
         </TableBodyRow>
     </TableBody>
+    <Hr classHr='my-0'></Hr>
     <TableBody tableBodyClass="divide-y">
         <TableBodyRow>
             <TableBodyCell rowspan="4">RENTER</TableBodyCell>
@@ -351,6 +354,7 @@
         </TableBodyRow>
         
     </TableBody>
+    <Hr classHr='my-0'></Hr>
     <TableBody tableBodyClass="divide-y">
         <TableBodyRow>
             <TableBodyCell rowspan="4">TIME BUILD</TableBodyCell>
