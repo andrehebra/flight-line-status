@@ -305,49 +305,49 @@
         <TableBodyRow>
             <TableBodyCell rowspan="4">DUAL</TableBodyCell>
             <TableBodyCell>Traffic Pattern</TableBodyCell>
-            <TableBodyCell>{dualTrafficPattern ? "GO" : "NO-GO"}</TableBodyCell>
+            <TableBodyCell tdClass={dualTrafficPattern ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{dualTrafficPattern ? "GO" : "NO-GO"}</TableBodyCell>
         </TableBodyRow>
         <TableBodyRow>
             <TableBodyCell>Practice Area</TableBodyCell>
-            <TableBodyCell>{dualPracticeArea ? "GO" : "NO-GO"}</TableBodyCell>
+            <TableBodyCell tdClass={dualPracticeArea ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{dualPracticeArea ? "GO" : "NO-GO"}</TableBodyCell>
         </TableBodyRow>
         <TableBodyRow>
             <TableBodyCell>Cross Country</TableBodyCell>
-            <TableBodyCell>{dualCrossCountry ? "GO" : "NO-GO"}</TableBodyCell>
+            <TableBodyCell tdClass={dualCrossCountry ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{dualCrossCountry ? "GO" : "NO-GO"}</TableBodyCell>
         </TableBodyRow>
         <TableBodyRow>
             <TableBodyCell>IFR</TableBodyCell>
-            <TableBodyCell>{dualIFR ? "GO" : "NO-GO"}</TableBodyCell>
+            <TableBodyCell tdClass={dualIFR ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{dualIFR ? "GO" : "NO-GO"}</TableBodyCell>
         </TableBodyRow>
     </TableBody>
     <TableBody tableBodyClass="divide-y">
         <TableBodyRow>
             <TableBodyCell rowspan="4">SOLO</TableBodyCell>
             <TableBodyCell>Traffic Pattern</TableBodyCell>
-            <TableBodyCell>{soloTrafficPattern ? "GO" : "NO-GO"}</TableBodyCell>
+            <TableBodyCell tdClass={soloTrafficPattern ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{soloTrafficPattern ? "GO" : "NO-GO"}</TableBodyCell>
         </TableBodyRow>
         <TableBodyRow>
             <TableBodyCell>Practice Area</TableBodyCell>
-            <TableBodyCell>{soloPracticeArea ? "GO" : "NO-GO"}</TableBodyCell>
+            <TableBodyCell tdClass={soloPracticeArea ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{soloPracticeArea ? "GO" : "NO-GO"}</TableBodyCell>
         </TableBodyRow>
         <TableBodyRow>
             <TableBodyCell>Cross Country</TableBodyCell>
-            <TableBodyCell>{soloCrossCountry ? "GO" : "NO-GO"}</TableBodyCell>
+            <TableBodyCell tdClass={soloCrossCountry ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{soloCrossCountry ? "GO" : "NO-GO"}</TableBodyCell>
         </TableBodyRow>
     </TableBody>
     <TableBody tableBodyClass="divide-y">
         <TableBodyRow>
             <TableBodyCell rowspan="4">RENTER</TableBodyCell>
             <TableBodyCell>Traffic Pattern</TableBodyCell>
-            <TableBodyCell>{renterTrafficPattern ? "GO" : "NO-GO"}</TableBodyCell>
+            <TableBodyCell tdClass={renterTrafficPattern ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{renterTrafficPattern ? "GO" : "NO-GO"}</TableBodyCell>
         </TableBodyRow>
         <TableBodyRow>
             <TableBodyCell>Practice Area</TableBodyCell>
-            <TableBodyCell>{renterPracticeArea ? "GO" : "NO-GO"}</TableBodyCell>
+            <TableBodyCell tdClass={renterPracticeArea ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{renterPracticeArea ? "GO" : "NO-GO"}</TableBodyCell>
         </TableBodyRow>
         <TableBodyRow>
             <TableBodyCell>Cross Country</TableBodyCell>
-            <TableBodyCell>{renterCrossCountry ? "GO" : "NO-GO"}</TableBodyCell>
+            <TableBodyCell tdClass={renterCrossCountry ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{renterCrossCountry ? "GO" : "NO-GO"}</TableBodyCell>
         </TableBodyRow>
         
     </TableBody>
@@ -355,15 +355,15 @@
         <TableBodyRow>
             <TableBodyCell rowspan="4">TIME BUILD</TableBodyCell>
             <TableBodyCell>Traffic Pattern</TableBodyCell>
-            <TableBodyCell>{timeBuildTrafficPattern ? "GO" : "NO-GO"}</TableBodyCell>
+            <TableBodyCell tdClass={timeBuildTrafficPattern ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{timeBuildTrafficPattern ? "GO" : "NO-GO"}</TableBodyCell>
         </TableBodyRow>
         <TableBodyRow>
             <TableBodyCell>Practice Area</TableBodyCell>
-            <TableBodyCell>{timeBuildPracticeArea ? "GO" : "NO-GO"}</TableBodyCell>
+            <TableBodyCell tdClass={timeBuildPracticeArea ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{timeBuildPracticeArea ? "GO" : "NO-GO"}</TableBodyCell>
         </TableBodyRow>
         <TableBodyRow>
             <TableBodyCell>Cross Country</TableBodyCell>
-            <TableBodyCell>{timeBuildCrossCountry ? "GO" : "NO-GO"}</TableBodyCell>
+            <TableBodyCell tdClass={timeBuildCrossCountry ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{timeBuildCrossCountry ? "GO" : "NO-GO"}</TableBodyCell>
         </TableBodyRow>
         
     </TableBody>
@@ -398,4 +398,6 @@
     :global(.container) {
         padding-left: 2vw;
     }
+
+    
 </style>
