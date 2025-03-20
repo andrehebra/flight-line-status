@@ -4,34 +4,83 @@
     import { onMount } from 'svelte';
 
     // variables to indicate whether or not flights are allowed: false = no go, true = go
-    let dualTrafficPattern = false;
-    let dualPracticeArea = false;
-    let dualCrossCountry = false;
-    let dualIFR = false;
+    let dualTrafficPattern = true;
+    let dualPracticeArea = true;
+    let dualCrossCountry = true;
+    let dualIFR = true;
 
-    let soloTrafficPattern = false;
-    let soloPracticeArea = false;
-    let soloCrossCountry = false;
-    let soloIFR = false;
+    let soloTrafficPattern = true;
+    let soloPracticeArea = true;
+    let soloCrossCountry = true;
 
-    let renterTrafficPattern = false;
-    let renterPracticeArea = false;
-    let renterCrossCountry = false;
-    let renterIFR = false;
+    let renterTrafficPattern = true;
+    let renterPracticeArea = true;
+    let renterCrossCountry = true;
+    let renterIFR = true;
 
-    let timeBuildTrafficPattern = false;
-    let timeBuildPracticeArea = false;
-    let timeBuildCrossCountry = false;
-    let timeBuildIFR = false;
+    let timeBuildTrafficPattern = true;
+    let timeBuildPracticeArea = true;
+    let timeBuildCrossCountry = true;
+    let timeBuildIFR = true;
 
     export let data;
     const { metarReports } = data;
 
+    let bestRunway = 0;
+    let crossWindComponent = 0;
+    let headWindComponent = 0;
 
+    function calculateRunwayWindComponents(windDirection, windSpeed) {
+    // Runway headings in degrees
+    const runways = {
+        7: 70,
+        25: 250,
+        13: 130,
+        31: 310
+    };
+
+    bestRunway = null;
+    let bestHeadwind = -Infinity;
+    let bestCrosswind = 0;
+
+    // Function to calculate the angle between wind direction and runway heading
+    function calculateAngleDifference(windDirection, runwayHeading) {
+        let angle = Math.abs(windDirection - runwayHeading);
+        if (angle > 180) {
+        angle = 360 - angle;
+        }
+        return angle;
+    }
+
+    // Loop through each runway to calculate the headwind and crosswind components
+    for (let runway in runways) {
+        const runwayHeading = runways[runway];
+        const angle = calculateAngleDifference(windDirection, runwayHeading);
+
+        // Calculate headwind component (wind aligned with runway)
+        const headwindComponent = windSpeed * Math.cos((angle * Math.PI) / 180);
+        // Calculate crosswind component (wind perpendicular to runway)
+        const crosswindComponent = windSpeed * Math.sin((angle * Math.PI) / 180);
+
+        // Update the best runway if the current runway has a higher headwind component
+        if (headwindComponent > bestHeadwind) {
+        bestRunway = runway;
+        bestHeadwind = headwindComponent;
+        bestCrosswind = crosswindComponent;
+        }
+    }
+
+    headWindComponent = bestHeadwind;
+    crossWindComponent = bestCrosswind;
+    }
+
+    
     function calculateHolds(metar) {
         metar = metar.data[0];
 
         console.log(metar)
+        
+        // get the wind speed and direction including gusts if reported
         let windSpeed = metar.wspd;
         let windDirection = metar.wdir;
         let windGust = 0;
@@ -41,6 +90,77 @@
             windGust = metar.wgst;
         }
 
+
+        //check if gusts are 30 knots or above and make no go for ALL FLIGHTS
+        if (windGust >= 30) {
+            dualTrafficPattern = false;
+            dualPracticeArea = false;
+            dualCrossCountry = false;
+            dualIFR = false;
+            soloTrafficPattern = false;
+            soloPracticeArea = false;
+            soloCrossCountry = false;          
+            renterTrafficPattern = false;
+            renterPracticeArea = false;
+            renterCrossCountry = false;
+            renterIFR = false;
+            timeBuildTrafficPattern = false;
+            timeBuildPracticeArea = false;
+            timeBuildCrossCountry = false;
+            timeBuildIFR = false;    
+        }
+
+        // check if any gusts reported for student solo flights
+        if (windGust > windSpeed) {
+            soloTrafficPattern = false;
+            soloPracticeArea = false;
+            soloCrossCountry = false;
+        }
+
+        // check if total wind is greater than 25
+        if (windGust > 25 || windSpeed > 25) {
+            dualTrafficPattern = false;
+            dualPracticeArea = false;
+            dualCrossCountry = false;
+            dualIFR = false;
+            renterTrafficPattern = false;
+            renterPracticeArea = false;
+            renterCrossCountry = false;
+            renterIFR = false;
+            timeBuildTrafficPattern = false;
+            timeBuildPracticeArea = false;
+            timeBuildCrossCountry = false;
+            timeBuildIFR = false; 
+        }
+
+        //check if total wind is greater than 20 for student solos
+        if (windGust > 20 || windSpeed > 20) {
+            soloTrafficPattern = false;
+            soloPracticeArea = false;
+            soloCrossCountry = false;
+        }
+
+        //calculate the headwind / crosswind components as well as the best runway to be used
+        calculateRunwayWindComponents(windDirection, windGust);
+
+        console.log("best runway: " + bestRunway);
+        console.log("crosswind component: " + crossWindComponent);
+        console.log("headwind component: " + headWindComponent);
+
+
+
+
+
+
+        //get the ceiling
+        let lowestCeiling = 100000;
+        for (let i = 0; i < metar.clouds.length; i++) {
+            if (metar.clouds[i].cover == "BKN" || metar.clouds[i].cover == "OVC") {
+                if (metar.clouds[i].base <= lowestCeiling) {
+                    lowestCeling = metar.clouds[i].base;
+                }
+            }
+        }
         
     }
 
@@ -57,6 +177,7 @@
 
 <Heading tag="h1" class="mb-4" customSize="text-4xl font-extrabold  md:text-5xl lg:text-6xl">FLIGHT LINE STATUS</Heading>
 <P>DATE / TIME LAST UPDATED</P>
+<P>NUMBERS BASED ON RUNWAY {bestRunway}</P>
 
 <div class="tableContainer">
 <Table class="statusTable">
@@ -97,10 +218,6 @@
         <TableBodyRow>
             <TableBodyCell>Cross Country</TableBodyCell>
             <TableBodyCell>{soloCrossCountry ? "GO" : "NO-GO"}</TableBodyCell>
-        </TableBodyRow>
-        <TableBodyRow>
-            <TableBodyCell>IFR</TableBodyCell>
-            <TableBodyCell>{soloIFR ? "GO" : "NO-GO"}</TableBodyCell>
         </TableBodyRow>
     </TableBody>
     <TableBody tableBodyClass="divide-y">
