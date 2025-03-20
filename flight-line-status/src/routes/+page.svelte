@@ -1,6 +1,7 @@
 <script>
     import { Heading, P } from 'flowbite-svelte';
     import { Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Checkbox, TableSearch } from 'flowbite-svelte';
+    import { onMount } from 'svelte';
 
     // variables to indicate whether or not flights are allowed: false = no go, true = go
     let dualTrafficPattern = false;
@@ -23,36 +24,34 @@
     let timeBuildCrossCountry = false;
     let timeBuildIFR = false;
 
-    let metarReports = [];
+    export let data;
+    const { metarReports } = data;
 
-  // Define an async function to fetch data from the API
-  async function fetchMetarData() {
-    const url = 'https://aviationweather.gov/api/data/metar?ids=KORL&format=json&taf=false&hours=3';
 
-    try {
-      // Fetch the data from the API
-      const response = await fetch(url);
+    function calculateHolds(metar) {
+        metar = metar.data[0];
 
-      // Check if the response is successful
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
+        console.log(metar)
+        let windSpeed = metar.wspd;
+        let windDirection = metar.wdir;
+        let windGust = 0;
+        if (metar.wgst == null || metar.wgst <= metar.wspd) {
+            windGust = metar.wspd;
+        } else {
+            windGust = metar.wgst;
+        }
 
-      // Parse the JSON data
-      const data = await response.json();
-      metarReports = data; // Store the fetched data in metarReports array
-      console.log(metarReports)
-    } catch (error) {
-      console.error('Error fetching METAR data:', error);
+        
     }
-  }
-
-    // Fetch the data when the component is mounted
-    import { onMount } from 'svelte';
 
     onMount(() => {
-    fetchMetarData();
+        if (data) {
+            calculateHolds(data);
+        } else {
+            console.log('Data is not available');
+        }
     });
+
 
 </script>
 
