@@ -61,8 +61,6 @@
     const runways = {
         7: 70,
         25: 250,
-        13: 130,
-        31: 310
     };
 
     bestRunway = null;
