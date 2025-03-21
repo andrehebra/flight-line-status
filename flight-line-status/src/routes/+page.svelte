@@ -306,19 +306,19 @@
         <TableBodyRow>
             <TableBodyCell rowspan="4">DUAL</TableBodyCell>
             <TableBodyCell>Traffic Pattern</TableBodyCell>
-            <TableBodyCell tdClass={dualTrafficPattern ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{dualTrafficPattern ? "GO" : "NO-GO"}</TableBodyCell>
+            <TableBodyCell tdClass={dualTrafficPattern ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{dualTrafficPattern ? "OPEN" : "HOLD"}</TableBodyCell>
         </TableBodyRow>
         <TableBodyRow>
             <TableBodyCell>Practice Area</TableBodyCell>
-            <TableBodyCell tdClass={dualPracticeArea ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{dualPracticeArea ? "GO" : "NO-GO"}</TableBodyCell>
+            <TableBodyCell tdClass={dualPracticeArea ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{dualPracticeArea ? "OPEN" : "HOLD"}</TableBodyCell>
         </TableBodyRow>
         <TableBodyRow>
             <TableBodyCell>Cross Country</TableBodyCell>
-            <TableBodyCell tdClass={dualCrossCountry ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{dualCrossCountry ? "GO" : "NO-GO"}</TableBodyCell>
+            <TableBodyCell tdClass={dualCrossCountry ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{dualCrossCountry ? "OPEN" : "HOLD"}</TableBodyCell>
         </TableBodyRow>
         <TableBodyRow>
             <TableBodyCell>IFR</TableBodyCell>
-            <TableBodyCell tdClass={dualIFR ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{dualIFR ? "GO" : "NO-GO"}</TableBodyCell>
+            <TableBodyCell tdClass={dualIFR ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{dualIFR ? "OPEN" : "HOLD"}</TableBodyCell>
         </TableBodyRow>
     </TableBody>
     <Hr classHr='my-0'></Hr>
@@ -326,15 +326,15 @@
         <TableBodyRow>
             <TableBodyCell rowspan="4">SOLO</TableBodyCell>
             <TableBodyCell>Traffic Pattern</TableBodyCell>
-            <TableBodyCell tdClass={soloTrafficPattern ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{soloTrafficPattern ? "GO" : "NO-GO"}</TableBodyCell>
+            <TableBodyCell tdClass={soloTrafficPattern ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{soloTrafficPattern ? "OPEN" : "HOLD"}</TableBodyCell>
         </TableBodyRow>
         <TableBodyRow>
             <TableBodyCell>Practice Area</TableBodyCell>
-            <TableBodyCell tdClass={soloPracticeArea ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{soloPracticeArea ? "GO" : "NO-GO"}</TableBodyCell>
+            <TableBodyCell tdClass={soloPracticeArea ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{soloPracticeArea ? "OPEN" : "HOLD"}</TableBodyCell>
         </TableBodyRow>
         <TableBodyRow>
             <TableBodyCell>Cross Country</TableBodyCell>
-            <TableBodyCell tdClass={soloCrossCountry ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{soloCrossCountry ? "GO" : "NO-GO"}</TableBodyCell>
+            <TableBodyCell tdClass={soloCrossCountry ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{soloCrossCountry ? "OPEN" : "HOLD"}</TableBodyCell>
         </TableBodyRow>
     </TableBody>
     <Hr classHr='my-0'></Hr>
@@ -342,15 +342,15 @@
         <TableBodyRow>
             <TableBodyCell rowspan="4">RENTER</TableBodyCell>
             <TableBodyCell>Traffic Pattern</TableBodyCell>
-            <TableBodyCell tdClass={renterTrafficPattern ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{renterTrafficPattern ? "GO" : "NO-GO"}</TableBodyCell>
+            <TableBodyCell tdClass={renterTrafficPattern ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{renterTrafficPattern ? "OPEN" : "HOLD"}</TableBodyCell>
         </TableBodyRow>
         <TableBodyRow>
             <TableBodyCell>Practice Area</TableBodyCell>
-            <TableBodyCell tdClass={renterPracticeArea ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{renterPracticeArea ? "GO" : "NO-GO"}</TableBodyCell>
+            <TableBodyCell tdClass={renterPracticeArea ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{renterPracticeArea ? "OPEN" : "HOLD"}</TableBodyCell>
         </TableBodyRow>
         <TableBodyRow>
             <TableBodyCell>Cross Country</TableBodyCell>
-            <TableBodyCell tdClass={renterCrossCountry ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{renterCrossCountry ? "GO" : "NO-GO"}</TableBodyCell>
+            <TableBodyCell tdClass={renterCrossCountry ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{renterCrossCountry ? "OPEN" : "HOLD"}</TableBodyCell>
         </TableBodyRow>
         
     </TableBody>
@@ -359,15 +359,15 @@
         <TableBodyRow>
             <TableBodyCell rowspan="4">TIME BUILD</TableBodyCell>
             <TableBodyCell>Traffic Pattern</TableBodyCell>
-            <TableBodyCell tdClass={timeBuildTrafficPattern ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{timeBuildTrafficPattern ? "GO" : "NO-GO"}</TableBodyCell>
+            <TableBodyCell tdClass={timeBuildTrafficPattern ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{timeBuildTrafficPattern ? "OPEN" : "HOLD"}</TableBodyCell>
         </TableBodyRow>
         <TableBodyRow>
             <TableBodyCell>Practice Area</TableBodyCell>
-            <TableBodyCell tdClass={timeBuildPracticeArea ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{timeBuildPracticeArea ? "GO" : "NO-GO"}</TableBodyCell>
+            <TableBodyCell tdClass={timeBuildPracticeArea ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{timeBuildPracticeArea ? "OPEN" : "HOLD"}</TableBodyCell>
         </TableBodyRow>
         <TableBodyRow>
             <TableBodyCell>Cross Country</TableBodyCell>
-            <TableBodyCell tdClass={timeBuildCrossCountry ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{timeBuildCrossCountry ? "GO" : "NO-GO"}</TableBodyCell>
+            <TableBodyCell tdClass={timeBuildCrossCountry ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{timeBuildCrossCountry ? "OPEN" : "HOLD"}</TableBodyCell>
         </TableBodyRow>
         
     </TableBody>
