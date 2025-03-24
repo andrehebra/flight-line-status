@@ -1,6 +1,6 @@
 <script>
     import { Heading, P } from 'flowbite-svelte';
-    import { Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Checkbox, TableSearch } from 'flowbite-svelte';
+    import { Checkbox, TableSearch } from 'flowbite-svelte';
     import { onMount } from 'svelte';
     import { Hr } from 'flowbite-svelte'
 
@@ -316,118 +316,165 @@
 
 
 </script>
-<div class="container">
-<h1>FLIGHT LINE STATUS</h1>
-<div class="horizontal">
-    <P>{getFormattedDate()} - Based on usage of runway {bestRunway}</P>
-    <P>-</P>
-    <P id={gustsReportedTaf ? "gusts" : ""}>{gustsReportedTaf == true ? "Gusts reported on MCO TAF within the next hour" : "No gusts reported on MCO TAF within the next hour"}</P>
-</div>
-
-
-<div class="tableContainer">
-<Table class="statusTable">
-    <TableHead theadClass='text-xl uppercase'>
-      <TableHeadCell>Flight Profile</TableHeadCell>
-      <TableHeadCell>Conditions</TableHeadCell>
-      <TableHeadCell>Status</TableHeadCell>
-    </TableHead>
-    <TableBody tableBodyClass="divide-y">
-        <TableBodyRow>
-            <TableBodyCell rowspan="4">DUAL</TableBodyCell>
-            <TableBodyCell>Traffic Pattern</TableBodyCell>
-            <TableBodyCell tdClass={dualTrafficPattern ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{dualTrafficPattern ? "OPEN" : "HOLD"}</TableBodyCell>
-        </TableBodyRow>
-        <TableBodyRow>
-            <TableBodyCell>Practice Area</TableBodyCell>
-            <TableBodyCell tdClass={dualPracticeArea ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{dualPracticeArea ? "OPEN" : "HOLD"}</TableBodyCell>
-        </TableBodyRow>
-        <TableBodyRow>
-            <TableBodyCell>Cross Country</TableBodyCell>
-            <TableBodyCell tdClass={dualCrossCountry ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{dualCrossCountry ? "OPEN" : "HOLD"}</TableBodyCell>
-        </TableBodyRow>
-        <TableBodyRow>
-            <TableBodyCell>IFR</TableBodyCell>
-            <TableBodyCell tdClass={dualIFR ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{dualIFR ? "OPEN" : "HOLD"}</TableBodyCell>
-        </TableBodyRow>
-    </TableBody>
-    <Hr classHr='my-0'></Hr>
-    <TableBody tableBodyClass="divide-y">
-        <TableBodyRow>
-            <TableBodyCell rowspan="4">SOLO</TableBodyCell>
-            <TableBodyCell>Traffic Pattern</TableBodyCell>
-            <TableBodyCell tdClass={soloTrafficPattern ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{soloTrafficPattern ? "OPEN" : "HOLD"}</TableBodyCell>
-        </TableBodyRow>
-        <TableBodyRow>
-            <TableBodyCell>Practice Area</TableBodyCell>
-            <TableBodyCell tdClass={soloPracticeArea ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{soloPracticeArea ? "OPEN" : "HOLD"}</TableBodyCell>
-        </TableBodyRow>
-        <TableBodyRow>
-            <TableBodyCell>Cross Country</TableBodyCell>
-            <TableBodyCell tdClass={soloCrossCountry ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{soloCrossCountry ? "OPEN" : "HOLD"}</TableBodyCell>
-        </TableBodyRow>
-    </TableBody>
-    <Hr classHr='my-0'></Hr>
-    <TableBody tableBodyClass="divide-y">
-        <TableBodyRow>
-            <TableBodyCell rowspan="4">RENTER</TableBodyCell>
-            <TableBodyCell>Traffic Pattern</TableBodyCell>
-            <TableBodyCell tdClass={renterTrafficPattern ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{renterTrafficPattern ? "OPEN" : "HOLD"}</TableBodyCell>
-        </TableBodyRow>
-        <TableBodyRow>
-            <TableBodyCell>Practice Area</TableBodyCell>
-            <TableBodyCell tdClass={renterPracticeArea ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{renterPracticeArea ? "OPEN" : "HOLD"}</TableBodyCell>
-        </TableBodyRow>
-        <TableBodyRow>
-            <TableBodyCell>Cross Country</TableBodyCell>
-            <TableBodyCell tdClass={renterCrossCountry ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{renterCrossCountry ? "OPEN" : "HOLD"}</TableBodyCell>
-        </TableBodyRow>
-        
-    </TableBody>
-    <Hr classHr='my-0'></Hr>
-    <TableBody tableBodyClass="divide-y">
-        <TableBodyRow>
-            <TableBodyCell rowspan="4">TIME BUILD</TableBodyCell>
-            <TableBodyCell>Traffic Pattern</TableBodyCell>
-            <TableBodyCell tdClass={timeBuildTrafficPattern ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{timeBuildTrafficPattern ? "OPEN" : "HOLD"}</TableBodyCell>
-        </TableBodyRow>
-        <TableBodyRow>
-            <TableBodyCell>Practice Area</TableBodyCell>
-            <TableBodyCell tdClass={timeBuildPracticeArea ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{timeBuildPracticeArea ? "OPEN" : "HOLD"}</TableBodyCell>
-        </TableBodyRow>
-        <TableBodyRow>
-            <TableBodyCell>Cross Country</TableBodyCell>
-            <TableBodyCell tdClass={timeBuildCrossCountry ? 'px-6 py-4 whitespace-nowrap font-medium bg-blue-500' : 'px-6 py-4 whitespace-nowrap font-medium bg-red-500'}>{timeBuildCrossCountry ? "OPEN" : "HOLD"}</TableBodyCell>
-        </TableBodyRow>
-        
-    </TableBody>
+<div class="horiz">
+    <div class="blank"></div>
     
-  </Table>
+<div class="container">
+    <h1>FLIGHT LINE STATUS</h1>
+    <div class="horizontal">
+        <P>{getFormattedDate()} - Based on usage of runway {bestRunway}</P>
+        <P>-</P>
+        <P id={gustsReportedTaf ? "gusts" : ""}>{gustsReportedTaf == true ? "Gusts reported on MCO TAF within the next hour" : "No gusts reported on MCO TAF within the next hour"}</P>
+    </div>
+    
+    <div class="heightbox"></div>
+    
+    <div class="tableContainer">
+    <table class="statusTable">
+        
+        <thead theadClass='text-xl uppercase'>
+            <tr>
+                <th>FLIGHT PROFILE</th>
+                <th>CONDITIONS</th>
+                <th>STATUS</th>
+            </tr>
+        </thead>
+        
+        <tbody tableBodyClass="divide-y">
+            <tr>
+                <td rowspan="4">DUAL</td>
+                <td>TRAFFIC PATTERN</td>
+                <td class={dualTrafficPattern ? 'line-open' : 'line-hold'}>{dualTrafficPattern ? "OPEN" : "HOLD"}</td>
+            </tr>
+            <tr>
+                <td>PRACTICE AREA</td>
+                <td class={dualPracticeArea ? 'line-open' : 'line-hold'}>{dualPracticeArea ? "OPEN" : "HOLD"}</td>
+            </tr>
+            <tr>
+                <td>CROSS COUNTRY</td>
+                <td class={dualCrossCountry ? 'line-open' : 'line-hold'}>{dualCrossCountry ? "OPEN" : "HOLD"}</td>
+            </tr>
+            <tr>
+                <td>IFR</td>
+                <td class={dualIFR ? 'line-open' : 'line-hold'}>{dualIFR ? "OPEN" : "HOLD"}</td>
+            </tr>
+        </tbody>
+        <tbody tableBodyClass="divide-y">
+            <tr>
+                <td rowspan="4">SOLO</td>
+                <td>TRAFFIC PATTERN</td>
+                <td class={soloTrafficPattern ? 'line-open' : 'line-hold'}>{soloTrafficPattern ? "OPEN" : "HOLD"}</td>
+            </tr>
+            <tr>
+                <td>PRACTICE AREA</td>
+                <td class={soloPracticeArea ? 'line-open' : 'line-hold'}>{soloPracticeArea ? "OPEN" : "HOLD"}</td>
+            </tr>
+            <tr>
+                <td>CROSS COUNTRY</td>
+                <td class={soloCrossCountry ? 'line-open' : 'line-hold'}>{soloCrossCountry ? "OPEN" : "HOLD"}</td>
+            </tr>
+        </tbody>
+        <tbody tableBodyClass="divide-y">
+            <tr>
+                <td rowspan="4">RENTER</td>
+                <td>TRAFFIC PATTERN</td>
+                <td class={renterTrafficPattern ? 'line-open' : 'line-hold'}>{renterTrafficPattern ? "OPEN" : "HOLD"}</td>
+            </tr>
+            <tr>
+                <td>PRACTICE AREA</td>
+                <td class={renterPracticeArea ? 'line-open' : 'line-hold'}>{renterPracticeArea ? "OPEN" : "HOLD"}</td>
+            </tr>
+            <tr>
+                <td>CROSS COUNTRY</td>
+                <td class={renterCrossCountry ? 'line-open' : 'line-hold'}>{renterCrossCountry ? "OPEN" : "HOLD"}</td>
+            </tr>
+            
+        </tbody>
+        <tbody tableBodyClass="divide-y">
+            <tr>
+                <td rowspan="4">TIME BUILD</td>
+                <td>TRAFFIC PATTERN</td>
+                <td class={timeBuildTrafficPattern ? 'line-open' : 'line-hold'}>{timeBuildTrafficPattern ? "OPEN" : "HOLD"}</td>
+            </tr>
+            <tr>
+                <td>PRACTICE AREA</td>
+                <td class={timeBuildPracticeArea ? 'line-open' : 'line-hold'}>{timeBuildPracticeArea ? "OPEN" : "HOLD"}</td>
+            </tr>
+            <tr>
+                <td>CROSS COUNTRY</td>
+                <td class={timeBuildCrossCountry ? 'line-open' : 'line-hold'}>{timeBuildCrossCountry ? "OPEN" : "HOLD"}</td>
+            </tr>
+            
+        </tbody>
+        
+    </table>
+    </div>
+    </div>
+    
+    <div class="blank"></div>
 </div>
-</div>
+
 
 <style>
-    :global(html) {
-        background-color: white;
+    :global(html, body) {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        width: 100vw;
     }
+
+    :global(.horiz) {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+
+    :global(.heightbox) {
+        height: 10px;
+        width: 100vw;
+    }
+
+    :global(.line-open) {
+        background-color: rgb(17, 221, 17);
+    }
+
+    :global(.line-hold) {
+        background-color: red;
+    }
+
+
     :global(.statusTable) {
-        width: 100%;
+        width: 100%
     }
 
     :global(.horizontal) {
         display: flex;
         flex-direction: row;
         gap: 5px;
-        width: 98vw;
+    }
+
+    :global(thead) {
+        background-color: #39488e;
+        color: white;
+        text-align: left;
+        font-size: 30px;
+    }
+
+    :global(td) {
+        font-size: 20px;
+        border: 1px solid #dddddd;
+        height: 37px;
     }
 
     :global(.tableContainer) {
-        padding-top: 5px;
-        width: 98vw;
+        width: 100%;
     }
     :global(P) {
         color: #39488e;
-        font-size: 1.6rem;
+        font-size: 1.3rem;
     }
 
     :global(h1) {
@@ -437,7 +484,14 @@
     }
 
     :global(.container) {
-        padding-left: 2vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%; /* Full width of the viewport */
+        height: 100vh; /* Full height of the viewport */
+        margin: 0;
+        padding: 0;
     }
 
     :global(#gusts) {
