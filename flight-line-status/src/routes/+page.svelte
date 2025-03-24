@@ -413,6 +413,7 @@
         display: flex;
         flex-direction: row;
         gap: 5px;
+        width: 98vw;
     }
 
     :global(.tableContainer) {
