@@ -6,28 +6,28 @@
 
     //return a readable date
     function getFormattedDate() {
-  const now = new Date();
+        const now = new Date();
 
-  // Array of weekday names
-  const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  // Array of month names
-  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        // Array of weekday names
+        const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        // Array of month names
+        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-  // Get the weekday, month, day, hour, and minute
-  const weekday = weekdays[now.getDay()];
-  const month = months[now.getMonth()];
-  const day = now.getDate();
-  const hour = now.getHours();
-  const minute = now.getMinutes();
+        // Get the weekday, month, day, hour, and minute
+        const weekday = weekdays[now.getDay()];
+        const month = months[now.getMonth()];
+        const day = now.getDate();
+        const hour = now.getHours();
+        const minute = now.getMinutes();
 
-  // Format time in 12-hour format with AM/PM
-  const period = hour >= 12 ? "pm" : "am";
-  const formattedHour = hour % 12 || 12; // Converts 24-hour time to 12-hour time (e.g., 0 -> 12, 13 -> 1)
-  const formattedMinute = minute < 10 ? `0${minute}` : minute; // Add leading zero for single digits
+        // Format time in 12-hour format with AM/PM
+        const period = hour >= 12 ? "pm" : "am";
+        const formattedHour = hour % 12 || 12; // Converts 24-hour time to 12-hour time (e.g., 0 -> 12, 13 -> 1)
+        const formattedMinute = minute < 10 ? `0${minute}` : minute; // Add leading zero for single digits
 
-  // Return the final formatted string
-  return `${weekday}, ${month} ${day} at ${formattedHour}:${formattedMinute}${period}`;
-}
+        // Return the final formatted string
+        return `${weekday}, ${month} ${day} at ${formattedHour}:${formattedMinute}${period}`;
+    }
 
     // determine if gusts are reported on the TAF
     let gustsReportedTaf = false;
@@ -60,45 +60,45 @@
     let headWindComponent = 0;
 
     function calculateRunwayWindComponents(windDirection, windSpeed) {
-    // Runway headings in degrees
-    const runways = {
-        7: 70,
-        25: 250,
-    };
+        // Runway headings in degrees
+        const runways = {
+            7: 70,
+            25: 250,
+        };
 
-    bestRunway = null;
-    let bestHeadwind = -Infinity;
-    let bestCrosswind = 0;
+        bestRunway = null;
+        let bestHeadwind = -Infinity;
+        let bestCrosswind = 0;
 
-    // Function to calculate the angle between wind direction and runway heading
-    function calculateAngleDifference(windDirection, runwayHeading) {
-        let angle = Math.abs(windDirection - runwayHeading);
-        if (angle > 180) {
-        angle = 360 - angle;
+        // Function to calculate the angle between wind direction and runway heading
+        function calculateAngleDifference(windDirection, runwayHeading) {
+            let angle = Math.abs(windDirection - runwayHeading);
+            if (angle > 180) {
+                angle = 360 - angle;
+            }
+            return angle;
         }
-        return angle;
-    }
 
-    // Loop through each runway to calculate the headwind and crosswind components
-    for (let runway in runways) {
-        const runwayHeading = runways[runway];
-        const angle = calculateAngleDifference(windDirection, runwayHeading);
+        // Loop through each runway to calculate the headwind and crosswind components
+        for (let runway in runways) {
+            const runwayHeading = runways[runway];
+            const angle = calculateAngleDifference(windDirection, runwayHeading);
 
-        // Calculate headwind component (wind aligned with runway)
-        const headwindComponent = windSpeed * Math.cos((angle * Math.PI) / 180);
-        // Calculate crosswind component (wind perpendicular to runway)
-        const crosswindComponent = windSpeed * Math.sin((angle * Math.PI) / 180);
+            // Calculate headwind component (wind aligned with runway)
+            const headwindComponent = windSpeed * Math.cos((angle * Math.PI) / 180);
+            // Calculate crosswind component (wind perpendicular to runway)
+            const crosswindComponent = windSpeed * Math.sin((angle * Math.PI) / 180);
 
-        // Update the best runway if the current runway has a higher headwind component
-        if (headwindComponent > bestHeadwind) {
-        bestRunway = runway;
-        bestHeadwind = headwindComponent;
-        bestCrosswind = crosswindComponent;
+            // Update the best runway if the current runway has a higher headwind component
+            if (headwindComponent > bestHeadwind) {
+            bestRunway = runway;
+            bestHeadwind = headwindComponent;
+            bestCrosswind = crosswindComponent;
+            }
         }
-    }
 
-    headWindComponent = bestHeadwind;
-    crossWindComponent = bestCrosswind;
+        headWindComponent = bestHeadwind;
+        crossWindComponent = bestCrosswind;
     }
 
     function calculateGusts(taf) {
@@ -316,7 +316,7 @@
 <div class="horizontal">
     <P>{getFormattedDate()} - Based on usage of runway {bestRunway}</P>
     <P>-</P>
-    <P id={gustsReportedTaf ? "gusts" : ""}>{gustsReportedTaf == true ? "Gusts Reported on MCO TAF within the next 8 hours" : "No Gusts Reported on MCO TAF within the next 8 hours"}</P>
+    <P id={gustsReportedTaf ? "gusts" : ""}>{gustsReportedTaf == true ? "Gusts reported on MCO TAF within the next 8 hours" : "No gusts reported on MCO TAF within the next 8 hours"}</P>
 </div>
 
 
