@@ -412,7 +412,7 @@
     :global(.horizontal) {
         display: flex;
         flex-direction: row;
-        gap: 5  px;
+        gap: 5px;
     }
 
     :global(.tableContainer) {
@@ -421,7 +421,7 @@
     }
     :global(P) {
         color: #39488e;
-        font-size: 1.3rem;
+        font-size: 1.6rem;
     }
 
     :global(h1) {
