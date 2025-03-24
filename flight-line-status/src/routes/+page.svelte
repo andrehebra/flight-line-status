@@ -107,7 +107,7 @@
         console.log(currentTaf);
 
         const currentTimestamp = Date.now();
-        const futureTimestamp = currentTimestamp + 8 * 60 * 60 * 1000; //8 hours into the future
+        const futureTimestamp = currentTimestamp + 1 * 60 * 60 * 1000; //8 hours into the future
          console.log(currentTimestamp);
          console.log(futureTimestamp);
 
@@ -134,7 +134,6 @@
             windGust = metar.wgst;
         }
 
-
         //check if gusts are 30 knots or above and make no go for ALL FLIGHTS
         if (windGust >= 30) {
             dualTrafficPattern = false;
@@ -159,6 +158,13 @@
             soloTrafficPattern = false;
             soloPracticeArea = false;
             soloCrossCountry = false;
+        }
+
+        // check if gusts reported on taf in future period
+        if (gustsReportedTaf) {
+            soloCrossCountry = false;
+            soloPracticeArea = false;
+            soloTrafficPattern = false;
         }
 
         // check if total wind is greater than 25
@@ -294,9 +300,8 @@
 
     onMount(() => {
         if (data) {
-            console.log(data.data[0]);
-            calculateHolds(data.data[0]);
             calculateGusts(data.data[1]);
+            calculateHolds(data.data[0]);
         } else {
             console.log('Data is not available');
         }
@@ -316,7 +321,7 @@
 <div class="horizontal">
     <P>{getFormattedDate()} - Based on usage of runway {bestRunway}</P>
     <P>-</P>
-    <P id={gustsReportedTaf ? "gusts" : ""}>{gustsReportedTaf == true ? "Gusts reported on MCO TAF within the next 8 hours" : "No gusts reported on MCO TAF within the next 8 hours"}</P>
+    <P id={gustsReportedTaf ? "gusts" : ""}>{gustsReportedTaf == true ? "Gusts reported on MCO TAF within the next hour" : "No gusts reported on MCO TAF within the next hour"}</P>
 </div>
 
 
