@@ -108,11 +108,11 @@
 
         const currentTimestamp = Date.now();
         const futureTimestamp = currentTimestamp + 8 * 60 * 60 * 1000; //8 hours into the future
-        // console.log(currentTimestamp);
-        // console.log(futureTimestamp);
+         console.log(currentTimestamp);
+         console.log(futureTimestamp);
 
         for (let i = 0; i < currentTaf.length; i++) {
-            if (futureTimestamp > currentTaf[i].timeFrom) {
+            if (futureTimestamp >= currentTaf[i].timeFrom * 1000 && currentTimestamp <= currentTaf[i].timeTo * 1000) {
                 if (currentTaf[i].wgst) {
                     gustsReportedTaf = true;
                 }   
