@@ -437,6 +437,10 @@
         width: 100vw;
     }
 
+    :global(th) {
+        padding-left: 10px;
+    }
+
     :global(.line-open) {
         background-color: rgb(17, 221, 17);
     }
@@ -467,6 +471,7 @@
         font-size: 20px;
         border: 1px solid #dddddd;
         height: 37px;
+        padding-left: 10px;
     }
 
     :global(.tableContainer) {
