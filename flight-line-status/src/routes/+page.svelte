@@ -29,6 +29,9 @@
   return `${weekday}, ${month} ${day} at ${formattedHour}:${formattedMinute}${period}`;
 }
 
+    // determine if gusts are reported on the TAF
+    let gustsReportedTaf = false;
+
     // variables to indicate whether or not flights are allowed: false = no go, true = go
     let dualTrafficPattern = true;
     let dualPracticeArea = true;
@@ -98,11 +101,28 @@
     crossWindComponent = bestCrosswind;
     }
 
+    function calculateGusts(taf) {
+        console.log(taf);
+        let currentTaf = taf[0].fcsts;
+        console.log(currentTaf);
+
+        const currentTimestamp = Date.now();
+        const futureTimestamp = currentTimestamp + 8 * 60 * 60 * 1000; //8 hours into the future
+        // console.log(currentTimestamp);
+        // console.log(futureTimestamp);
+
+        for (let i = 0; i < currentTaf.length; i++) {
+            if (futureTimestamp > currentTaf[i].timeFrom) {
+                if (currentTaf[i].wgst) {
+                    gustsReportedTaf = true;
+                }   
+            }
+            
+        }
+    }
     
     function calculateHolds(metar) {
-        metar = metar.data[0];
-
-        console.log(metar)
+        metar = metar[0];
         
         // get the wind speed and direction including gusts if reported
         let windSpeed = metar.wspd;
@@ -274,7 +294,9 @@
 
     onMount(() => {
         if (data) {
-            calculateHolds(data);
+            console.log(data.data[0]);
+            calculateHolds(data.data[0]);
+            calculateGusts(data.data[1]);
         } else {
             console.log('Data is not available');
         }
@@ -292,6 +314,7 @@
 <div class="container">
 <h1>FLIGHT LINE STATUS</h1>
 <P>{getFormattedDate()} - Based on usage of runway {bestRunway}</P>
+<P id={gustsReportedTaf ? "gusts" : ""}>{gustsReportedTaf == true ? "Gusts Reported on MCO TAF within the next 8 hours" : "No Gusts Reported on MCO TAF within the next 8 hours"}</P>
 
 <div class="tableContainer">
 <Table class="statusTable">
@@ -399,6 +422,10 @@
 
     :global(.container) {
         padding-left: 2vw;
+    }
+
+    :global(#gusts) {
+        color: red;
     }
 
     
