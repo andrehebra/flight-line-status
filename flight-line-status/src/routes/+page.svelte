@@ -313,8 +313,12 @@
 </script>
 <div class="container">
 <h1>FLIGHT LINE STATUS</h1>
-<P>{getFormattedDate()} - Based on usage of runway {bestRunway}</P>
-<P id={gustsReportedTaf ? "gusts" : ""}>{gustsReportedTaf == true ? "Gusts Reported on MCO TAF within the next 8 hours" : "No Gusts Reported on MCO TAF within the next 8 hours"}</P>
+<div class="horizontal">
+    <P>{getFormattedDate()} - Based on usage of runway {bestRunway}</P>
+    <P>-</P>
+    <P id={gustsReportedTaf ? "gusts" : ""}>{gustsReportedTaf == true ? "Gusts Reported on MCO TAF within the next 8 hours" : "No Gusts Reported on MCO TAF within the next 8 hours"}</P>
+</div>
+
 
 <div class="tableContainer">
 <Table class="statusTable">
@@ -403,6 +407,12 @@
     }
     :global(.statusTable) {
         width: 100%;
+    }
+
+    :global(.horizontal) {
+        display: flex;
+        flex-direction: row;
+        gap: 5  px;
     }
 
     :global(.tableContainer) {
