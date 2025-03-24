@@ -406,12 +406,12 @@
     }
 
     :global(.tableContainer) {
-        padding-top: 10px;
+        padding-top: 5px;
         width: 98vw;
     }
     :global(P) {
         color: #39488e;
-        font-size: 2rem;
+        font-size: 1.3rem;
     }
 
     :global(h1) {
