@@ -292,7 +292,7 @@
         }
 
         //check if ceiling below 740
-        if (lowestCeiling < 740) {
+        if (lowestCeiling < 467) {
             dualIFR = false;
         }
         
