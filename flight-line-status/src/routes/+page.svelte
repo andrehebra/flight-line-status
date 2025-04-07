@@ -344,7 +344,7 @@
         <P>-</P>
         <P id={gustsReportedTaf ? "gusts" : ""}>{gustsReportedTaf == true ? "Gusts reported on MCO TAF within the next hour" : "No gusts reported on MCO TAF within the next hour"}</P>
     </div>
-    <P>Data Based on {metarAirport} METAR at {metarTime}z</P>
+    <P>Data Based on {metarAirport} METAR released at {metarTime}z</P>
     
     <div class="heightbox"></div>
     
