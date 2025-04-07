@@ -29,6 +29,9 @@
         return `${weekday}, ${month} ${day} at ${formattedHour}:${formattedMinute}${period}`;
     }
 
+    let metarAirport = '';
+    let metarTime = '';
+
     // determine if gusts are reported on the TAF
     let gustsReportedTaf = false;
 
@@ -120,9 +123,24 @@
             
         }
     }
+
+    function formatTime(dateString) {
+        // Parse the date string to a Date object
+        const date = new Date(dateString);
+
+        // Extract the hours and minutes
+        const hours = date.getHours().toString().padStart(2, '0'); // Pad single digit hours with leading zero
+        const minutes = date.getMinutes().toString().padStart(2, '0'); // Pad single digit minutes with leading zero
+
+        // Return the formatted string in "HH:MM" format
+        return `${hours}:${minutes}`;
+    }
     
     function calculateHolds(metar) {
         metar = metar[0];
+
+        metarAirport = metar.icaoId;
+        metarTime = formatTime(metar.receiptTime);
         
         // get the wind speed and direction including gusts if reported
         let windSpeed = metar.wspd;
@@ -326,6 +344,7 @@
         <P>-</P>
         <P id={gustsReportedTaf ? "gusts" : ""}>{gustsReportedTaf == true ? "Gusts reported on MCO TAF within the next hour" : "No gusts reported on MCO TAF within the next hour"}</P>
     </div>
+    <P>Data Based on {metarAirport} METAR at {metarTime}z</P>
     
     <div class="heightbox"></div>
     

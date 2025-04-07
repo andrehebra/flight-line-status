@@ -3,7 +3,7 @@
 //import fetch from 'node-fetch';
 
 export async function load() {
-  let apiUrl = 'https://aviationweather.gov/api/data/metar?ids=KORL&format=json&taf=false&hours=3';
+  let apiUrl = 'https://aviationweather.gov/api/data/metar?ids=KORL%2CKMCO%2CKSFB&format=json&taf=false';
 
   try {
     // Fetch the METAR data from the API
