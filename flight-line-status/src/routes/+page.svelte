@@ -86,11 +86,14 @@
     function determineRelevantSigmet(sigmetArray) {
         console.log(sigmetArray)
 
-        
+        const currentTimeStamp = Date.now();
 
         for (let i = 0; i < sigmetArray.length; i++) {
             if (isPointInsidePolygon({lat: 28.55, lon: -81.33},sigmetArray[i].coords)) {
-                insideSIGMET = true;
+                if (currentTimeStamp >= sigmetArray[i].validTimeFrom*1000 && currentTimeStamp <= sigmetArray[i].validTimeTo*1000) {
+                    
+                    insideSIGMET = true;
+                }
             }
         }
 
