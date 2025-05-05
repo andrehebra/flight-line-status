@@ -58,9 +58,61 @@
     export let data;
     const { metarReports } = data;
 
+    //console.log(data);
+
     let bestRunway = 0;
     let crossWindComponent = 0;
     let headWindComponent = 0;
+
+    function isPointInsidePolygon(testPoint, polygonCoords) {
+    const x = testPoint.lon;
+    const y = testPoint.lat;
+    let inside = false;
+
+    for (let i = 0, j = polygonCoords.length - 1; i < polygonCoords.length; j = i++) {
+        const xi = polygonCoords[i].lon, yi = polygonCoords[i].lat;
+        const xj = polygonCoords[j].lon, yj = polygonCoords[j].lat;
+
+        const intersect = ((yi > y) !== (yj > y)) &&
+                        (x < ((xj - xi) * (y - yi)) / (yj - yi) + xi);
+        if (intersect) inside = !inside;
+    }
+
+    return inside;
+    }
+
+    let insideSIGMET = false;
+
+    function determineRelevantSigmet(sigmetArray) {
+        console.log(sigmetArray)
+
+        
+
+        for (let i = 0; i < sigmetArray.length; i++) {
+            if (isPointInsidePolygon({lat: 28.55, lon: -81.33},sigmetArray[i].coords)) {
+                insideSIGMET = true;
+            }
+        }
+
+        if (insideSIGMET) {
+            dualTrafficPattern = false;
+            dualPracticeArea = false;
+            dualCrossCountry = false;
+            dualIFR = false;
+            soloTrafficPattern = false;
+            soloPracticeArea = false;
+            soloCrossCountry = false;          
+            renterTrafficPattern = false;
+            renterPracticeArea = false;
+            renterCrossCountry = false;
+            renterIFR = false;
+            timeBuildTrafficPattern = false;
+            timeBuildPracticeArea = false;
+            timeBuildCrossCountry = false;
+            timeBuildIFR = false;    
+        
+        }
+    }
 
     function calculateRunwayWindComponents(windDirection, windSpeed) {
         // Runway headings in degrees
@@ -107,14 +159,14 @@
     }
 
     function calculateGusts(taf) {
-        console.log(taf);
+        //console.log(taf);
         let currentTaf = taf[0].fcsts;
-        console.log(currentTaf);
+        //console.log(currentTaf);
 
         const currentTimestamp = Date.now();
         const futureTimestamp = currentTimestamp + 1 * 60 * 60 * 1000; //8 hours into the future
-         console.log(currentTimestamp);
-         console.log(futureTimestamp);
+         //console.log(currentTimestamp);
+         //console.log(futureTimestamp);
 
         for (let i = 0; i < currentTaf.length; i++) {
             if (futureTimestamp >= currentTaf[i].timeFrom * 1000 && currentTimestamp <= currentTaf[i].timeTo * 1000) {
@@ -213,9 +265,9 @@
         //calculate the headwind / crosswind components as well as the best runway to be used
         calculateRunwayWindComponents(windDirection, windGust);
 
-        console.log("best runway: " + bestRunway);
-        console.log("crosswind component: " + crossWindComponent);
-        console.log("headwind component: " + headWindComponent);
+        //console.log("best runway: " + bestRunway);
+        //console.log("crosswind component: " + crossWindComponent);
+        //console.log("headwind component: " + headWindComponent);
 
         //remove flights if crosswind greater than 15 knots
         if (crossWindComponent > 15) {
@@ -242,7 +294,7 @@
 
         //get the visibility
         let visibility = parseFloat(metar.visib);
-        console.log(visibility);
+        //console.log(visibility);
 
         //check if vis is less than 1sm to remove traffic pattern flights
         if (visibility < 1) {
@@ -322,6 +374,7 @@
         if (data) {
             calculateGusts(data.data[1]);
             calculateHolds(data.data[0]);
+            determineRelevantSigmet(data.data[2]);
         } else {
             console.log('Data is not available');
         }
@@ -347,6 +400,7 @@
         <P id={gustsReportedTaf ? "gusts" : ""}>{gustsReportedTaf == true ? "Gusts reported on MCO TAF within the next hour" : "No gusts reported on MCO TAF within the next hour"}</P>
     </div>
     <P>Data Based on {metarAirport} METAR released at {metarTime}z</P>
+    {#if insideSIGMET}<P id={insideSIGMET ? "gusts" : ""}>Convective SIGMET Active</P>{/if}
     
     <div class="heightbox"></div>
     

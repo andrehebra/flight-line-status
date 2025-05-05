@@ -35,8 +35,24 @@ export async function load() {
     // Parse the response as JSON
     const taf = await response.json();
 
+    // Fetch the TAF data from the API
+    apiUrl = "https://aviationweather.gov/api/data/airsigmet?format=json&hazard=conv";
+    response = await fetch(apiUrl);
+
+    if (!response.ok) {
+      // If the response isn't OK, return an error
+      return {
+        status: response.status,
+        body: { message: 'Failed to fetch METAR data' },
+      };
+    }
+
+    // Parse the response as JSON
+    const convectiveSigmet = await response.json();
+
+
     // Return the data as props for the Svelte component
-    return {data: [metar, taf]};
+    return {data: [metar, taf, convectiveSigmet]};
   } catch (error) {
     console.error('Error fetching METAR data:', error);
     return {
