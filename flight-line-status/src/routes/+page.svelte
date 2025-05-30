@@ -90,8 +90,9 @@
 
         for (let i = 0; i < sigmetArray.length; i++) {
             if (isPointInsidePolygon({lat: 28.55, lon: -81.33},sigmetArray[i].coords)) {
-                if (currentTimeStamp >= sigmetArray[i].validTimeFrom*1000 && currentTimeStamp <= sigmetArray[i].validTimeTo*1000) {
-                    if (sigmetArra[i].severity > 0) {
+                if (currentTimeStamp >= sigmetArray[i].validTimeFrom * 1000 && currentTimeStamp <= sigmetArray[i].validTimeTo * 1000) {
+                    console.log(i)
+                    if (sigmetArray[i].severity > 0) {
                         insideSIGMET = true;
                     }
                 }
