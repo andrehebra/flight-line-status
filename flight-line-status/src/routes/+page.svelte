@@ -30,6 +30,7 @@
     }
 
     let metarAirport = '';
+    let rawMetar = '';
     let metarTime = '';
 
     // determine if gusts are reported on the TAF
@@ -197,6 +198,9 @@
     
     function calculateHolds(metar) {
         metar = metar[0];
+
+        console.log(metar.rawOb);
+        rawMetar = metar.rawOb;
 
         metarAirport = metar.icaoId;
         metarTime = formatTime(metar.receiptTime);
@@ -404,7 +408,7 @@
         <P>-</P>
         <P id={gustsReportedTaf ? "gusts" : ""}>{gustsReportedTaf == true ? "Gusts reported on MCO TAF within the next hour" : "No gusts reported on MCO TAF within the next hour"}</P>
     </div>
-    <P>Data Based on {metarAirport} METAR released at {metarTime}z</P>
+    <P>{rawMetar}</P>
     {#if insideSIGMET}<P id={insideSIGMET ? "gusts" : ""}>Convective SIGMET Active</P>{/if}
     
     <div class="heightbox"></div>
