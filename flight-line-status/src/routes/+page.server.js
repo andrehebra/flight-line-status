@@ -36,7 +36,7 @@ export async function load() {
     const taf = await response.json();
 
     // Fetch the TAF data from the API
-    apiUrl = "https://aviationweather.gov/api/data/airsigmet?format=json&hazard=conv";
+    apiUrl = "https://aviationweather.gov/api/data/airsigmet?format=geojson&types=sigmet&hazard=conv";
     response = await fetch(apiUrl);
 
     if (!response.ok) {
@@ -47,9 +47,12 @@ export async function load() {
       };
     }
 
-    // Parse the response as JSON
-    const convectiveSigmet = await response.json();
+    const raw = await response.text();
+    console.log('Raw response:', raw);
 
+    // Parse the response as JSON
+    //const convectiveSigmet = await response.json();
+    const convectiveSigmet = {};
 
     // Return the data as props for the Svelte component
     return {data: [metar, taf, convectiveSigmet]};
