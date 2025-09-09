@@ -90,11 +90,14 @@
         const currentTimeStamp = Date.now();
 
         for (let i = 0; i < sigmetArray.length; i++) {
-            if (isPointInsidePolygon({lat: 28.55, lon: -81.33},sigmetArray[i].coords)) {
-                if (currentTimeStamp >= sigmetArray[i].validTimeFrom * 1000 && currentTimeStamp <= sigmetArray[i].validTimeTo * 1000) {
-                    console.log(i)
-                    if (sigmetArray[i].severity > 0) {
-                        insideSIGMET = true;
+            if (sigmetArray[i].hazard == "CONVECTIVE") {
+                //console.log(sigmetArray[i])
+                if (isPointInsidePolygon({lat: 28.55, lon: -81.33},sigmetArray[i].coords)) {
+                    if (currentTimeStamp >= sigmetArray[i].validTimeFrom * 1000 && currentTimeStamp <= sigmetArray[i].validTimeTo * 1000) {
+                        console.log(i)
+                        if (sigmetArray[i].severity > 0) {
+                            insideSIGMET = true;
+                        }
                     }
                 }
             }
@@ -197,7 +200,17 @@
     }
     
     function calculateHolds(metar) {
-        metar = metar[0];
+        console.log(metar)
+        let KORLexists = false;
+        for (let i = 0; i < metar.length; i++) {
+            if (metar[i].icaoId == "KORL") {
+                KORLexists = true;
+                metar = metar[i]
+            }
+        }
+        if (KORLexists == false) {
+            metar = metar[0];
+        }
 
         console.log(metar.rawOb);
         rawMetar = metar.rawOb;
