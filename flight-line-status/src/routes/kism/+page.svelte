@@ -126,10 +126,10 @@
     function calculateRunwayWindComponents(windDirection, windSpeed) {
         // Runway headings in degrees
         const runways = {
-            7: 67,
-            25: 247,
-            13: 131,
-            31: 311,
+            6: 57,
+            24: 237,
+            15: 147,
+            33: 327,
         };
 
         bestRunway = null;
