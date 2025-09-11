@@ -21,7 +21,7 @@ export async function load() {
     const metar = await response.json();
 
     // Fetch the TAF data from the API
-    apiUrl = "https://aviationweather.gov/api/data/taf?ids=KMCO&format=json&metar=false";
+    apiUrl = "https://aviationweather.gov/api/data/taf?ids=KISM&format=json&metar=false";
     response = await fetch(apiUrl);
 
     if (!response.ok) {
